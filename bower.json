@@ -1,0 +1,25 @@
+{
+  "name": "dash-quickstats",
+  "authors": [
+    "seph <sephvelut@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.4.0",
+    "flot-import": "*",
+    "jquery-import-seph": "*",
+    "bootstrap-import": "*",
+    "themify-import": "*",
+    "kapusta-sparkline-import": "*"
+  }
+}
