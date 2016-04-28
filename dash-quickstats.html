@@ -18,11 +18,11 @@
             <div class="media">
                 <div class="media-body">
                     <h5 class="media-heading">Lead/Hour <span class="text-success"><i class="ti-arrow-up fs-13"></i> 5.28%</span></h5>
-                    <div class="fs-36 fw-600 counter">650</div>
+                    <div id="quickstats-counter" class="fs-36 fw-600 counter">650</div>
                 </div>
                 <div class="media-right"><i class="fs-30 ti-receipt"></i></div>
             </div>
-            <div id="flot-order" style="height: 74px"></div>
+            <div id="quickstats-flotorder" style="height: 74px"></div>
         </div>
     </template>
     <script>
@@ -30,57 +30,55 @@
             is: 'dash-quickstats',
             attached: function () {
                 this.async(function () {
-                    $(document).ready(function () {
-                        var dataRevenue = [[0, 755], [1, 1133], [2, 1234], [3, 1448], [4, 1198], [5, 918], [6, 583], [7, 842], [8, 540], [9, 665], [10, 1195], [11, 742], [12, 1040], [13, 682], [14, 1190]];
+                    var dataRevenue = [[0, 755], [1, 1133], [2, 1234], [3, 1448], [4, 1198], [5, 918], [6, 583], [7, 842], [8, 540], [9, 665], [10, 1195], [11, 742], [12, 1040], [13, 682], [14, 1190]];
 
-                        var dataOrder = [[0, 57], [1, 58], [2, 93], [3, 11], [4, 40], [5, 93], [6, 29], [7, 19], [8, 87], [9, 14], [10, 130], [11, 91], [12, 80], [13, 49], [14, 59]];
+                    var dataOrder = [[0, 57], [1, 58], [2, 93], [3, 11], [4, 40], [5, 93], [6, 29], [7, 19], [8, 87], [9, 14], [10, 130], [11, 91], [12, 80], [13, 49], [14, 59]];
 
-                        var datasetOrder = [{
-                            label: 'Orders',
-                            data: dataOrder,
-                            color: '#f39c12'
+                    var datasetOrder = [{
+                        label: 'Orders',
+                        data: dataOrder,
+                        color: '#f39c12'
                         }];
 
-                        var optionsOrder = {
-                            series: {
-                                lines: {
-                                    show: true,
-                                    lineWidth: 1
-                                },
-                                points: {
-                                    show: true,
-                                    lineWidth: 0,
-                                    fill: true,
-                                    fillColor: '#f39c12'
-                                },
-                                shadowSize: 0
-                            },
-                            grid: {
-                                hoverable: true,
-                                borderWidth: 0
-                            },
-                            xaxis: {
-                                ticks: 0
-                            },
-                            yaxis: {
-                                ticks: 0
-                            },
-                            tooltip: {
+                    var optionsOrder = {
+                        series: {
+                            lines: {
                                 show: true,
-                                content: '%s: %y',
-                                defaultTheme: false
+                                lineWidth: 1
                             },
-                            legend: {
-                                show: false
-                            }
-                        };
+                            points: {
+                                show: true,
+                                lineWidth: 0,
+                                fill: true,
+                                fillColor: '#f39c12'
+                            },
+                            shadowSize: 0
+                        },
+                        grid: {
+                            hoverable: true,
+                            borderWidth: 0
+                        },
+                        xaxis: {
+                            ticks: 0
+                        },
+                        yaxis: {
+                            ticks: 0
+                        },
+                        tooltip: {
+                            show: true,
+                            content: '%s: %y',
+                            defaultTheme: false
+                        },
+                        legend: {
+                            show: false
+                        }
+                    };
 
-                        $.plot($('#flot-order'), datasetOrder, optionsOrder);
+                    $.plot($(this.$["quickstats-flotorder"]), datasetOrder, optionsOrder);
 
-                        $('.counter').counterUp({
-                            delay: 10,
-                            time: 1000
-                        });
+                    $(this.$["quickstats-counter"]).counterUp({
+                        delay: 10,
+                        time: 1000
                     });
                 });
             }
