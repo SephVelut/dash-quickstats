@@ -17,8 +17,8 @@
         <div class="mb-30">
             <div class="media">
                 <div class="media-body">
-                    <h5 class="media-heading">Lead/Hour <span class="text-success"><i class="ti-arrow-up fs-13"></i> 5.28%</span></h5>
-                    <div id="quickstats-counter" class="fs-36 fw-600 counter">650</div>
+                    <h5 id="quickstats-label" class="media-heading">{{label}} <span><i></i> [[computedMargin]]</span></h5>
+                    <div id="quickstats-counter" class="fs-36 fw-600 counter">{{stat}}</div>
                 </div>
                 <div class="media-right"><i class="fs-30 ti-receipt"></i></div>
             </div>
@@ -31,14 +31,28 @@
             attached: function () {
                 this.async(function () {
                     var dataRevenue = [[0, 755], [1, 1133], [2, 1234], [3, 1448], [4, 1198], [5, 918], [6, 583], [7, 842], [8, 540], [9, 665], [10, 1195], [11, 742], [12, 1040], [13, 682], [14, 1190]];
+            properties: {
+                label: {
+                    type: String,
+                    value: "Label"
+                },
 
                     var dataOrder = [[0, 57], [1, 58], [2, 93], [3, 11], [4, 40], [5, 93], [6, 29], [7, 19], [8, 87], [9, 14], [10, 130], [11, 91], [12, 80], [13, 49], [14, 59]];
+                margin: {
+                    type: String,
+                    value: "Null"
+                },
 
                     var datasetOrder = [{
                         label: 'Orders',
                         data: dataOrder,
                         color: '#f39c12'
                         }];
+                computedMargin: {
+                    type: String,
+                    computed: 'computeMargin(margin)'
+                }
+            },
 
                     var optionsOrder = {
                         series: {
@@ -73,6 +87,10 @@
                             show: false
                         }
                     };
+            computeMargin: function (data) {
+                var label = this.$["quickstats-label"];
+                var margin = Polymer.dom(label).firstElementChild;
+                var arrow = margin.firstElementChild;
 
                     $.plot($(this.$["quickstats-flotorder"]), datasetOrder, optionsOrder);
 
