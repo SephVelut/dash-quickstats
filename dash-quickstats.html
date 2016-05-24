@@ -30,9 +30,15 @@
                     value: "Label"
                 },
 
+                stat: {
+                    type: Number,
+                    value: 0,
+                    observer: '_renderCounter'
+                },
+
                 margin: {
                     type: String,
-                    value: "Null"
+                    value: "0"
                 },
 
                 computedMargin: {
@@ -57,12 +63,20 @@
                 return data;
             },
 
-            attached: function () {
-                this.async(function () {
+            _renderCounter: function(newValue, oldValue) {
+                if(this.stat !== 0) {
                     $(this.$["quickstats-counter"]).counterUp({
                         delay: 10,
-                        time: 1000
+                        time: 500
                     });
+                }
+            },
+
+            attached: function () {
+                this.async(function () {
+                    if(this.stat !== undefined) {
+                        this._renderCounter();
+                    }
                 });
             }
         });
